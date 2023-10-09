@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,25 +6,40 @@ using UnityEngine;
 public class EnemyShooter : MonoBehaviour
 {
     [SerializeField] private Transform _shootPoint;
-    [SerializeField] private GameObject _bullet;
-    [SerializeField] private float _deley;
+    [SerializeField] private EnemyBullet _bullet;
+    [SerializeField] private float _secondsBetweenSpawn;
 
-    private float _currentTime = 0;
 
-    private void Update()
+    private Coroutine _coroutine; 
+    private WaitForSeconds _waitForSeconds;
+    
+    private void Start()
     {
-        _currentTime += Time.deltaTime;
-        
-        if (_currentTime >= _deley)
-        {
-            _currentTime = 0;
-            
-            Shoot(_shootPoint);
-        }
+        _waitForSeconds = new WaitForSeconds(_secondsBetweenSpawn);
+    }
+
+    private void OnEnable()
+    {
+        _coroutine = StartCoroutine(Shoot());
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(_coroutine);
     }
 
     public void Shoot(Transform shootPoint)
     {
         Instantiate(_bullet, shootPoint.position, Quaternion.identity);
+    }
+
+    private IEnumerator Shoot()
+    {
+        do
+        {
+            Instantiate(_bullet, _shootPoint.position, Quaternion.identity);
+
+            yield return _waitForSeconds;
+        } while (Time.timeScale != 0);
     }
 }

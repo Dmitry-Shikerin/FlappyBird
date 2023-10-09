@@ -13,8 +13,7 @@ public class EnemyGenerator : EnemyPool
     [SerializeField] private float _minSpawnPositionY;
 
      private Coroutine _coroutine;
-    private WaitForSeconds _waitForSeconds;
-    private float _elapsedTime = 0;
+     private WaitForSeconds _waitForSeconds;
 
     private void Start()
     {

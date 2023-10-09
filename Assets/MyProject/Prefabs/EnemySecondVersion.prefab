@@ -179,5 +179,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shootPoint: {fileID: 8020644737205835766}
-  _bullet: {fileID: 7943391875837985950, guid: 653d61727108eed479e91b64e9847583, type: 3}
+  _bullet: {fileID: 5550890581968999858, guid: 653d61727108eed479e91b64e9847583, type: 3}
   _deley: 2
+  _secondsBetweenSpawn: 2
